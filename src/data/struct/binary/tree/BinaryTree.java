@@ -4,6 +4,11 @@ class Node<T extends Comparable<T> >{
 	private T data;
 	private Node<T> leftNode;
 	private Node<T> rightNode;
+	Node(){
+		data=null;
+		leftNode=null;
+		rightNode=null;
+	}
 	Node(T data){
 		this.data=data;
 		leftNode=null;
@@ -30,6 +35,25 @@ class Node<T extends Comparable<T> >{
 	
 }
 
-public class BinaryTree {
-	
+public class BinaryTree <T extends Comparable<T>>{
+	Node<T> root=null;
+	int size;
+	BinaryTree(){
+		size=0;
+		root=new Node<T>();
+	}
+	BinaryTree(T data){
+		root=new Node<T>(data);
+	}
+	public void insert(T data){
+		if(size==0){
+			root.setData(data);
+			size++;
+		}else{
+			
+		}
+	}
+	private void insert(Node<T> node,T data){
+		
+	}
 }
