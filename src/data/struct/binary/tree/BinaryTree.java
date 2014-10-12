@@ -44,16 +44,34 @@ public class BinaryTree <T extends Comparable<T>>{
 	}
 	BinaryTree(T data){
 		root=new Node<T>(data);
+		size=1;
+	}
+	public int Size(){
+		return size;
 	}
 	public void insert(T data){
 		if(size==0){
 			root.setData(data);
 			size++;
 		}else{
-			
+			insert(root,data);
 		}
 	}
 	private void insert(Node<T> node,T data){
-		
+		if(node.getData().compareTo(data)==-1){
+			if(node.getRightNode()==null){
+				node.setRightNode(new Node<T>(data));
+				size++;
+			}else{
+				insert(node.getRightNode(),data);
+			}
+		}else{
+			if(node.getLeftNode()==null){
+				node.setLeftNode(new Node<T>(data));
+				size++;
+			}else{
+				insert(node.getLeftNode(),data);
+			}
+		}
 	}
 }
