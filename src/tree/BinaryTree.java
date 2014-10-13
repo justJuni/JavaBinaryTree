@@ -1,4 +1,4 @@
-package data_struct;
+package tree;
 
 class TreeNode<T extends Comparable<T> >{
 	private T data;
@@ -46,7 +46,7 @@ public class BinaryTree <T extends Comparable<T>>{
 		root=new TreeNode<T>(data);
 		size=1;
 	}
-	public int Size(){
+	public int size(){
 		return size;
 	}
 	public void insert(T data){
@@ -74,8 +74,30 @@ public class BinaryTree <T extends Comparable<T>>{
 			}
 		}
 	}
-	boolean content(T data){
+	public boolean content(T data){
+		return content(data,root);
+	}
+	private boolean content(T data,TreeNode<T> node){
+		System.out.println("execute");
 		boolean content=false;
+		if(node==null || size==0){
+			return content;
+		}
+		else{
+			int compare=node.getData().compareTo(data);
+			switch(compare){
+				case -1:
+					content=content(data,node.getRightNode());
+					break;
+				case 0:
+					content=true;
+					break;
+				case 1:
+					content=content(data,node.getLeftNode());
+					break;
+			}
+		}
 		return content;
+	
 	}
 }
