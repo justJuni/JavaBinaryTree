@@ -1,4 +1,4 @@
-package data.struct.binary.tree;
+package data_struct.binary_tree;
 
 class Node<T extends Comparable<T> >{
 	private T data;
@@ -38,11 +38,11 @@ class Node<T extends Comparable<T> >{
 public class BinaryTree <T extends Comparable<T>>{
 	Node<T> root=null;
 	int size;
-	BinaryTree(){
+	public BinaryTree(){
 		size=0;
 		root=new Node<T>();
 	}
-	BinaryTree(T data){
+	public BinaryTree(T data){
 		root=new Node<T>(data);
 		size=1;
 	}
@@ -73,5 +73,9 @@ public class BinaryTree <T extends Comparable<T>>{
 				insert(node.getLeftNode(),data);
 			}
 		}
+	}
+	boolean content(T data){
+		boolean content=false;
+		return content;
 	}
 }
