@@ -1,15 +1,15 @@
-package data_struct.binary_tree;
+package data_struct;
 
-class Node<T extends Comparable<T> >{
+class TreeNode<T extends Comparable<T> >{
 	private T data;
-	private Node<T> leftNode;
-	private Node<T> rightNode;
-	Node(){
+	private TreeNode<T> leftNode;
+	private TreeNode<T> rightNode;
+	TreeNode(){
 		data=null;
 		leftNode=null;
 		rightNode=null;
 	}
-	Node(T data){
+	TreeNode(T data){
 		this.data=data;
 		leftNode=null;
 		rightNode=null;
@@ -20,30 +20,30 @@ class Node<T extends Comparable<T> >{
 	void setData(T data) {
 		this.data = data;
 	}
-	Node<T> getLeftNode() {
+	TreeNode<T> getLeftNode() {
 		return leftNode;
 	}
-	void setLeftNode(Node<T> leftNode) {
+	void setLeftNode(TreeNode<T> leftNode) {
 		this.leftNode = leftNode;
 	}
-	Node<T> getRightNode() {
+	TreeNode<T> getRightNode() {
 		return rightNode;
 	}
-	void setRightNode(Node<T> rightNode) {
+	void setRightNode(TreeNode<T> rightNode) {
 		this.rightNode = rightNode;
 	}
 	
 }
 
 public class BinaryTree <T extends Comparable<T>>{
-	Node<T> root=null;
+	TreeNode<T> root=null;
 	int size;
 	public BinaryTree(){
 		size=0;
-		root=new Node<T>();
+		root=new TreeNode<T>();
 	}
 	public BinaryTree(T data){
-		root=new Node<T>(data);
+		root=new TreeNode<T>(data);
 		size=1;
 	}
 	public int Size(){
@@ -57,17 +57,17 @@ public class BinaryTree <T extends Comparable<T>>{
 			insert(root,data);
 		}
 	}
-	private void insert(Node<T> node,T data){
+	private void insert(TreeNode<T> node,T data){
 		if(node.getData().compareTo(data)==-1){
 			if(node.getRightNode()==null){
-				node.setRightNode(new Node<T>(data));
+				node.setRightNode(new TreeNode<T>(data));
 				size++;
 			}else{
 				insert(node.getRightNode(),data);
 			}
 		}else{
 			if(node.getLeftNode()==null){
-				node.setLeftNode(new Node<T>(data));
+				node.setLeftNode(new TreeNode<T>(data));
 				size++;
 			}else{
 				insert(node.getLeftNode(),data);
