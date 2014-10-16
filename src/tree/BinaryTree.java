@@ -1,15 +1,15 @@
 package tree;
 
-class TreeNode<T extends Comparable<T> >{
+class Node<T extends Comparable<T> >{
 	private T data;
-	private TreeNode<T> leftNode;
-	private TreeNode<T> rightNode;
-	TreeNode(){
+	private Node<T> leftNode;
+	private Node<T> rightNode;
+	Node(){
 		data=null;
 		leftNode=null;
 		rightNode=null;
 	}
-	TreeNode(T data){
+	Node(T data){
 		this.data=data;
 		leftNode=null;
 		rightNode=null;
@@ -20,30 +20,30 @@ class TreeNode<T extends Comparable<T> >{
 	void setData(T data) {
 		this.data = data;
 	}
-	TreeNode<T> getLeftNode() {
+	Node<T> getLeftNode() {
 		return leftNode;
 	}
-	void setLeftNode(TreeNode<T> leftNode) {
+	void setLeftNode(Node<T> leftNode) {
 		this.leftNode = leftNode;
 	}
-	TreeNode<T> getRightNode() {
+	Node<T> getRightNode() {
 		return rightNode;
 	}
-	void setRightNode(TreeNode<T> rightNode) {
+	void setRightNode(Node<T> rightNode) {
 		this.rightNode = rightNode;
 	}
 	
 }
 
 public class BinaryTree <T extends Comparable<T>>{
-	TreeNode<T> root=null;
+	Node<T> root=null;
 	int size;
 	public BinaryTree(){
 		size=0;
-		root=new TreeNode<T>();
+		root=new Node<T>();
 	}
 	public BinaryTree(T data){
-		root=new TreeNode<T>(data);
+		root=new Node<T>(data);
 		size=1;
 	}
 	public int size(){
@@ -57,17 +57,17 @@ public class BinaryTree <T extends Comparable<T>>{
 			insert(root,data);
 		}
 	}
-	private void insert(TreeNode<T> node,T data){
+	private void insert(Node<T> node,T data){
 		if(node.getData().compareTo(data)==-1){
 			if(node.getRightNode()==null){
-				node.setRightNode(new TreeNode<T>(data));
+				node.setRightNode(new Node<T>(data));
 				size++;
 			}else{
 				insert(node.getRightNode(),data);
 			}
 		}else{
 			if(node.getLeftNode()==null){
-				node.setLeftNode(new TreeNode<T>(data));
+				node.setLeftNode(new Node<T>(data));
 				size++;
 			}else{
 				insert(node.getLeftNode(),data);
@@ -75,29 +75,51 @@ public class BinaryTree <T extends Comparable<T>>{
 		}
 	}
 	public boolean content(T data){
-		return content(data,root);
-	}
-	private boolean content(T data,TreeNode<T> node){
-		System.out.println("execute");
-		boolean content=false;
-		if(node==null || size==0){
-			return content;
+		Node<T> node=getNode(data,root);
+		if(node==null){
+			return false;
 		}
 		else{
-			int compare=node.getData().compareTo(data);
-			switch(compare){
-				case -1:
-					content=content(data,node.getRightNode());
-					break;
-				case 0:
-					content=true;
-					break;
-				case 1:
-					content=content(data,node.getLeftNode());
-					break;
-			}
+			return true;
 		}
-		return content;
-	
 	}
+	
+	
+	private Node<T> getNode(T data,Node<T> node){
+		Node<T> tmp=null;
+		if(node==null){
+			return null;
+		}
+		if(node.getData().compareTo(data)==0){
+			tmp=node;
+			
+		}
+		if(node.getData().compareTo(data)==-1){
+			tmp=getNode(data,node.getRightNode());
+			
+		}
+		if(node.getData().compareTo(data)==1){
+			tmp=getNode(data,node.getLeftNode());
+		}
+		return tmp;
+	}
+	public int subTreeSize(T data){
+		Node<T> subTreeRoot=getNode(data,root);
+		if(subTreeRoot==null){
+			return 0;
+		}
+		else{
+			int size=subTreeSize(subTreeRoot);
+			return size;
+		}
+	}
+	private int subTreeSize(Node<T> node){
+		if(node==null){
+			return 0;
+		}
+		else{
+			return 1+subTreeSize(node.getLeftNode())+subTreeSize(node.getRightNode());
+		}
+	}
+	
 }
